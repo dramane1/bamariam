@@ -17,12 +17,12 @@ class ExpenseRapportMonthController extends Controller
         if($request->from != '' && $request->to != '')
         {
             $monthExpenses = Expense::whereBetween('expense_at',[$request->from, $request->to])
-            ->paginate(10);  
+            ->orderBy('expense_at', 'desc')->paginate(10);
         }
         else
         {
             $monthExpenses = Expense::whereMonth('expense_at',Carbon::now()->month)
-            ->paginate(10);           
+            ->orderBy('expense_at', 'desc') ->paginate(10);
         }
 
     return view('pages.rapports.expenserapportsmonth.index',compact('monthExpenses'));

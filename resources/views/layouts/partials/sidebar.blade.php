@@ -5,9 +5,13 @@
         <!-- end sidebar branding-->
         <div class="ml-auto">
             <!-- sidebar pin-->
-            <a href="#" class="admin-pin-sidebar btn-ghost btn btn-rounded-circle"></a>
+            <a href="#" class="admin-pin-sidebar">
+                <i class="fa fa-map-pin" aria-hidden="true"></i>
+
+            </a>
             <!-- sidebar close for mobile device-->
-            <a href="#" class="admin-close-sidebar"></a>
+            <a href="#" class="admin-close-sidebar">                <i class="fa fa-map-pin" aria-hidden="true"></i>
+            </a>
         </div>
     </div>
     <div class="admin-sidebar-wrapper js-scrollbar">
@@ -21,8 +25,10 @@
                     </span>
 
                     <span class="menu-icon">
-                        <i class="icon-placeholder mdi mdi-view-dashboard"></i>
-                    </span>
+                        {{-- <i data-feather="circle"></i> --}}
+                        <i class="fa fa-home" aria-hidden="true"></i>
+
+                   </span>
                 </a>
             </li>
             <li class="menu-item {{ str_starts_with(Route::currentRouteName(), 'salaries.') ? 'active' : '' }}">
@@ -34,7 +40,7 @@
                     </span>
 
                     <span class="menu-icon">
-                        <i class="icon-placeholder mdi mdi-office-building"></i>
+                        <i class="fas fa-comment-dollar"></i>
                     </span>
                 </a>
             </li>
@@ -47,7 +53,7 @@
                     </span>
 
                     <span class="menu-icon">
-                        <i class="icon-placeholder mdi mdi-store"></i>
+                        <i class="fas fa-comment-dollar"></i>
                     </span>
                 </a>
             </li>
@@ -60,12 +66,12 @@
                     </span>
 
                     <span class="menu-icon">
-                        <i class="icon-placeholder mdi mdi-account-group"></i>
+                        <i class="fas fa-chart-line"></i>     
                     </span>
                 </a>
             </li>
 
-            {{-- <li class="menu-item {{ str_starts_with(Route::currentRouteName(), 'rapports.') ? 'active' : '' }}">
+            <li class="menu-item {{ str_starts_with(Route::currentRouteName(), 'rapports.') ? 'active' : '' }}">
                 <a href="{{ route('rapports.index') }}" class="menu-link">
                     <span class="menu-label">
                         <span class="menu-name">
@@ -74,10 +80,10 @@
                     </span>
 
                     <span class="menu-icon">
-                        <i class="icon-placeholder mdi mdi-account-group"></i>
-                    </span>
+                        <i class="fas fa-chart-line"></i>     
+                     </span>
                 </a>
-            </li> --}}
+            </li>
 
 
         </ul>

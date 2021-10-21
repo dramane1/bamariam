@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::group(['middleware' => ['auth'] ], function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::post('/', [App\Http\Controllers\HomeController::class, 'store'])->name('home.store');
 
     Route::resource('/salaries', SalaryController::class);
     Route::resource('/expenses', ExpenseController::class);
@@ -28,6 +29,10 @@ Route::group(['middleware' => ['auth'] ], function(){
     Route::resource('/incomerapportsyear','IncomeRapportYearController');
     Route::resource('/expenserapportsmonth','ExpenseRapportMonthController');
     Route::resource('/expenserapportsyear','ExpenseRapportYearController');
+    Route::get('/salary-month-export','SalaryRapportMonthController@print')->name('export.salary.month');
+    Route::get('/salary-year-export','SalaryRapportYearController@print')->name('export.salary.year');
+
+
 
 
 

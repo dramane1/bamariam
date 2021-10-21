@@ -24,6 +24,16 @@
                 <div class="col-12">
                     <div class="card m-b-30">
                         <div class="card-body ">
+                            @if ($errors->any())
+                            <div class="alert alert-danger" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                @foreach ($errors->all() as $error)
+                                    {{ $error }}<br>
+                                @endforeach
+                            </div>
+                      @endif
                             <form action="{{ route('expenses.update',$expense) }}" method="POST" id="myform" enctype="multipart/form-data" >
                                 @csrf
                                 {{ method_field('PUT') }}
@@ -43,7 +53,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label" for="expense_at">Choisir la date du depense</label>
-                                        <input type="date" name="expense_at" id="expense_at" class="form-control form-control-alternative"  value="{{ old('expense_at') }}">
+                                        <input type="date" name="expense_at" id="expense_at" value="<?php echo date('Y-m-d'); ?>" class="form-control form-control-alternative"  value="{{ old('expense_at') }}">
 
                                         @error('expense_at')
                                             <div class="text text-danger" role="alert">
@@ -162,7 +172,7 @@
                                                         <span class="help-block invalid-feedback">{{ $message }}</span>
                                                     @enderror
                                                 </div>
-                                                
+
                                                 <div class="form-group col-md-6">
                                                     <label for="description">Description </label>
                                                     <input type="text" name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" id="description" value="{{ old('description') ?? $expense->description }}" placeholder="">

@@ -25,18 +25,51 @@ class RapportController extends Controller
         $user = auth()->user();
 
         // by month and year
-        $yearIncomes= Income::get()->groupBy(function($d) {
-            return Carbon::parse($d->income_at)->format('y');
-        })->take(1)->reverse();
+        // $yearIncomes= Income::get()->groupBy(function($d) {
+        //     return Carbon::parse($d->income_at)->format('y');
+        // })->take(1)->reverse();
 
-        $yearSalaries = Salary::get()->groupBy(function($d) {
-                    return Carbon::parse($d->salary_at)->format('y');
-                })->take(1)->reverse();
+        // $yearSalaries = Salary::get()->groupBy(function($d) {
+        //             return Carbon::parse($d->salary_at)->format('y');
+        //         })->take(1)->reverse();
 
-        $yearExpenses = Expense::get()->groupBy(function($d) {
-            return Carbon::parse($d->expense_at)->format('y');
-        })->take(1)->reverse();
-        return view('pages.rapports.index',compact('yearIncomes','yearSalaries','yearExpenses'));
+        // $yearExpenses = Expense::get()->groupBy(function($d) {
+        //     return Carbon::parse($d->expense_at)->format('y');
+        // })->take(1)->reverse();
+
+        
+
+    $expenses = Expense::orderBy('expense_at', 'desc')->get()->groupBy(function($d) {
+        return Carbon::parse($d->expense_at)->format('M Y');
+    })->take(10)->reverse();
+
+    $salaries = Salary::orderBy('salary_at', 'desc')->get()->groupBy(function($d) {
+        return Carbon::parse($d->salary_at)->format('M Y');
+    })->take(10)->reverse();
+    // dd($salaries);
+
+    $incomes = Income::orderBy('income_at', 'desc')->get()->groupBy(function($d) {
+        return Carbon::parse($d->income_at)->format('M Y');
+    })->take(10)->reverse();
+
+
+    $salaryYear = Salary::orderBy('salary_at', 'desc')->get()->groupBy(function($d) {
+        return Carbon::parse($d->salary_at)->format('Y');
+    })->take(10)->reverse();
+
+    // dd($salaryYear);
+
+    $expenseYear = Expense::orderBy('expense_at', 'desc')->get()->groupBy(function($d) {
+        return Carbon::parse($d->expense_at)->format('Y');
+    })->take(10)->reverse();
+
+    $incomeYear = Income::orderBy('income_at', 'desc')->get()->groupBy(function($d) {
+        return Carbon::parse($d->income_at)->format('Y');
+    })->take(10)->reverse();
+
+
+
+        return view('pages.rapports.index',compact('incomes','expenses','salaries','salaryYear','expenseYear','incomeYear'));
 
 
 //     $monthSalaries = Salary::get()->groupBy(function($d) {

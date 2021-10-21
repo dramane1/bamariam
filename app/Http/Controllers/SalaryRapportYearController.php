@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Salary;
 use carbon\carbon;
 use Session;
+use DB;
+use PDF;
 class SalaryRapportYearController extends Controller
 {
     /**
@@ -16,17 +18,30 @@ class SalaryRapportYearController extends Controller
     public function index(Request $request)
     {
         $yearSalaries = Salary::whereYear('salary_at',Carbon::now()->year)
-        ->paginate(10);
+        ->orderBy('salary_at', 'desc')->paginate(10);
 
         if (!empty(request('query'))) {
         $yearSalaries = Salary::whereYear('salary_at', 'Like', '%' . request('query') . '%')
-        ->paginate(10);
+        ->orderBy('salary_at', 'desc')->paginate(10);
         }
 
 
         return view('pages.rapports.salaryrapportsyear.index',compact('yearSalaries'));
     }
-
+    
+    public function print(Request $request){
+       
+                $yearSalaries = Salary::whereYear('salary_at',Carbon::now()->year)
+                ->orderBy('salary_at', 'ASC')->get();
+                $yearSalariesTotal = Salary::whereYear('salary_at',Carbon::now()->year)
+                ->sum('salary_amount');
+                return PDF::loadView('templates.salaryYear', compact('yearSalaries','yearSalariesTotal'))->stream('SalaireAnnuel'.request('query').'.pdf');
+                Session::flash('notification.message', 'Le pdf a été téléchargée avec succès !');
+                Session::flash('notification.type', 'success');
+            
+    
+    
+    }
     /**
      * Show the form for creating a new resource.
      *

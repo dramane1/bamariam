@@ -16,7 +16,16 @@ class IncomeController extends Controller
      */
     public function index()
     {
-        $incomes = Income::paginate(10);
+        if (!empty(request('query'))) {
+            $incomes = Income::where('income_at', 'Like', '%' . request('query') . '%')
+            ->orderBy('created_at', 'desc')->paginate(10);
+                        // dd($s / alaries);
+
+            }
+    else{
+        $incomes= Income::orderBy('created_at', 'desc')->paginate(10);
+
+    }
 
         return view('pages.incomes.index',compact('incomes'));
     }

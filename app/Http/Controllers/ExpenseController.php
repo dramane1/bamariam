@@ -17,8 +17,15 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $expenses = Expense::paginate(10);
-        return view('pages.expenses.index',compact('expenses'));
+        if (!empty(request('query'))) {
+            $expenses = Expense::where('expense_at', 'Like', '%' . request('query') . '%')
+            ->orderBy('expense_at', 'desc')->paginate(10);
+
+            }
+    else{
+        $expenses= Expense::orderBy('expense_at', 'desc')->paginate(10);
+
+    }        return view('pages.expenses.index',compact('expenses'));
     }
 
     /**

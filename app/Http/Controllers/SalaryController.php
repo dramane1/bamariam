@@ -14,9 +14,19 @@ class SalaryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $salaries= Salary::paginate(10);
+
+            if (!empty(request('query'))) {
+                $salaries = Salary::where('salary_at', 'Like', '%' . request('query') . '%')
+                ->orderBy('salary_at', 'desc')->paginate(10);
+
+                }
+        else{
+            $salaries= Salary::orderBy('salary_at', 'desc')->paginate(10);
+
+        }
+
         return view('pages.salaries.index',compact('salaries'));
 
     }

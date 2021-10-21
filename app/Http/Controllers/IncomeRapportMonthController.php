@@ -15,15 +15,17 @@ class IncomeRapportMonthController extends Controller
      */
     public function index(Request $request)
     {
+
+
         if($request->from != '' && $request->to != '')
         {
             $monthIncomes = Income::whereBetween('income_at',[$request->from, $request->to])
-            ->paginate(10);  
+            ->orderBy('created_at', 'desc')->paginate(10);
         }
         else
         {
             $monthIncomes = Income::whereMonth('income_at',Carbon::now()->month)
-            ->paginate(10);           
+            ->orderBy('created_at', 'desc')->paginate(10);
         }
 
     return view('pages.rapports.incomerapportsmonth.index',compact('monthIncomes'));

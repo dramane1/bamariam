@@ -14,12 +14,15 @@ class IncomeRapportYearController extends Controller
      */
     public function index(Request $request)
     {
+        // $this->validate($request,[
+        //     'query'=>'required'
+        // ]);
         $yearIncomes = Income::whereYear('income_at',Carbon::now()->year)
-        ->paginate(10);
+        ->orderBy('created_at', 'desc')->paginate(10);
 
         if (!empty(request('query'))) {
         $yearIncomes = Income::whereYear('income_at', 'Like', '%' . request('query') . '%')
-        ->paginate(10);
+        ->orderBy('created_at', 'desc')->paginate(10);
         }
 
 

@@ -15,11 +15,11 @@ class ExpenseRapportYearController extends Controller
     public function index(Request $request)
     {
         $yearExpenses = Expense::whereYear('expense_at',Carbon::now()->year)
-        ->paginate(10);
+        ->orderBy('created_at', 'desc')->paginate(10);
 
         if (!empty(request('query'))) {
         $yearExpenses = Expense::whereYear('expense_at', 'Like', '%' . request('query') . '%')
-        ->paginate(10);
+        ->orderBy('created_at', 'desc') ->paginate(10);
         }
 
 

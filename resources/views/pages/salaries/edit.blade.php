@@ -30,6 +30,16 @@
                 <div class="col-12">
                     <div class="card m-b-30">
                         <div class="card-body ">
+                            @if ($errors->any())
+                            <div class="alert alert-danger" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                @foreach ($errors->all() as $error)
+                                    {{ $error }}<br>
+                                @endforeach
+                            </div>
+                      @endif
                             <form action="{{ route('salaries.update',$salary) }}" method="POST" id="myform" enctype="multipart/form-data" >
                                 @csrf
                                 {{ method_field('PUT') }}

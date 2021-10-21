@@ -17,26 +17,28 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
     <!--vendors-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/datepicker/datepicker.css') }}"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/select2/select2.css') }}"/>
+    <link rel="stylesheet" href="{{asset('assets/fontawesome/css/fontawesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/fontawesome/css/all.min.css')}}">
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,600" rel="stylesheet">
 
-    <!--Material Icons-->
-    <link rel="stylesheet" type="text/css" href="//cdn.materialdesignicons.com/4.5.95/css/materialdesignicons.min.css"/>
-    <!--Material Icons-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/fonts/feather/feather-icons.css') }}"/>
+
+
     <!--Bootstrap + atmos Admin CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/atmos.min.css') }}"/>
+
+    <link rel="stylesheet" href="{{asset('assets/datatables/datatables.min.css')}}">
+
     <!-- Additional library for page -->
 
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 
-   <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/fontawesome/css/all.min.css') }}">
+
 
     <!-- my styles  -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}"/>
 
     <link href="{{ asset('assets/vendor/select2/select2.min.css') }}" rel="stylesheet" />
+
 </head>
